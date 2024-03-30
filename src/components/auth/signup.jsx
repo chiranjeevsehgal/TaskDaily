@@ -1,61 +1,78 @@
-import React from 'react'
-import { ArrowRight } from 'lucide-react'
-import {auth} from '../../firebase'
-import {useAuthState} from 'react-firebase-hooks/auth'
-import { signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,createUserWithEmailAndPassword } from '@firebase/auth'
-import { useNavigate } from 'react-router-dom'
-// import {auth} from '../firebase'
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
+import { auth } from '../../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, setPersistence, browserLocalPersistence, signOut } from '@firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
-
-  const navigateTo=useNavigate()
-
-  const [userData,setUserData]=React.useState({email: "", password: ""})
-
+  const navigateTo = useNavigate();
+  const [userData, setUserData] = React.useState({ email: '', password: '' });
+  const [user, loading, error] = useAuthState(auth);
 
   const provider = new GoogleAuthProvider();
-  const handleGoogleSignUp=async ()=>{
+
+  const handleGoogleSignUp = async () => {
     await signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
-    console.log(user)
-    
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
-  window.localStorage.setItem("email",userData.email);
-  navigateTo("/dashboard")
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+    window.localStorage.setItem('email', userData.email);
+    navigateTo('/dashboard');
+  };
+
+  const handleSignUp = async (userData) => {
+    console.log(userData);
+    await createUserWithEmailAndPassword(auth, userData.email, userData.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+    window.localStorage.setItem('email', userData.email);
+    navigateTo('/dashboard');
+  };
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    navigateTo('/signin');
+  };
+
+  React.useEffect(() => {
+    // Set local persistence
+    setPersistence(auth, browserLocalPersistence)
+      .then(() => {
+        console.log('Local persistence enabled');
+      })
+      .catch((error) => {
+        console.error('Error setting local persistence:', error);
+      });
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  const handleSignUp=async (userData)=>{
-    console.log(userData)
-    await createUserWithEmailAndPassword(auth, userData.email, userData.password)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    console.log(user)
-    
-    // ...
-  }).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
-  window.localStorage.setItem("email",userData.email);
-  navigateTo("/dashboard")
+  if (user) {
+    return (
+      <div>
+        <p>You are already logged in.</p>
+        <button onClick={() => navigateTo('/dashboard')}>Go to Dashboard</button>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+    );
   }
 
   return (
