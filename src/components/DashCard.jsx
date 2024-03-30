@@ -21,7 +21,7 @@ export default function DashCard({title}) {
                         
                         <div className="flex flex-col items-center justify-center">
                             <a
-                                href="/dashboard"
+                                href={ title ==="DSA" ? "/dsa" : "/aptitude"}
                                 className="rounded-md bg-green-700 py-2.5 px-4 text-lg font-semibold text-white shadow-sm hover:bg-green-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-200">
                                 Go to {title} Section
                             </a>

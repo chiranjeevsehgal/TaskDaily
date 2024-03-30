@@ -3,6 +3,8 @@ import Home from './routes/Home';
 import Signup from "./components/auth/Signup";
 import Dashboard from "./routes/Dashboard";
 import Leaderboard from "./routes/Leaderboard";
+import Aptitude from "./routes/Aptitude";
+import DSA from "./routes/DSA";
 
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
           <Route path="signup" element={< Signup/>} />
           <Route path="dashboard" element={< Dashboard/>} />
           <Route path="leaderboard" element={< Leaderboard/>} />
+          <Route path="dsa" element={< DSA/>} />
+          <Route path="aptitude" element={< Aptitude/>} />
         </Route>
       </Routes>
     </BrowserRouter>
