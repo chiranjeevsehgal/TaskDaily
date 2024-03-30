@@ -43,7 +43,7 @@ function Navbar() {
               />
             </svg>
           </span>
-          <span className="font-bold">TaskDaily</span>
+          <span className="font-bold text-xl">TaskDaily</span>
         </div>
         <div className="hidden lg:block">
           <ul className="inline-flex space-x-8">
@@ -51,7 +51,7 @@ function Navbar() {
               <li key={item.name}>
                 <a
                   href={item.href}
-                  className="text-sm font-semibold text-gray-800 hover:text-gray-900"
+                  className="text-lg font-semibold text-gray-800 hover:text-gray-900"
                 >
                   {item.name}
                 </a>
@@ -62,10 +62,18 @@ function Navbar() {
         <div className="hidden lg:block">
           <button
             type="button"
-            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            className="rounded-md text-gray-800 px-3 py-2 font-semibold  shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black text-lg mr-4"
           >
-            Button text
+            Sign In
           </button>
+          
+          <button
+            type="button"
+            className="rounded-md bg-black px-3 py-2 font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black text-lg"
+          >
+            Sign Up
+          </button>
+          
         </div>
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
@@ -90,7 +98,7 @@ function Navbar() {
                         />
                       </svg>
                     </span>
-                    <span className="font-bold">DevUI</span>
+                    <span className="font-bold">TaskDaily</span>
                   </div>
                   <div className="-mr-2">
                     <button
@@ -120,9 +128,15 @@ function Navbar() {
                 </div>
                 <button
                   type="button"
+                  className="mt-8 w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                >
+                  Sign In
+                </button>
+                <button
+                  type="button"
                   className="mt-4 w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
-                  Button text
+                  Sign Up
                 </button>
               </div>
             </div>
