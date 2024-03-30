@@ -2,23 +2,51 @@ import React from 'react'
 import { ArrowRight } from 'lucide-react'
 import {auth} from '../../firebase'
 import {useAuthState} from 'react-firebase-hooks/auth'
-import { signInWithEmailAndPassword } from '@firebase/auth'
+import { signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,createUserWithEmailAndPassword } from '@firebase/auth'
 // import {auth} from '../firebase'
+
 export default function Signup() {
 
 
   const [userData,setUserData]=React.useState({email: "", password: ""})
 
-  const handleSignUp=()=>{
-    signInWithEmailAndPassword(auth, userData.email, userData.password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
+
+  const provider = new GoogleAuthProvider();
+  const handleGoogleSignUp=()=>{
+    signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
     // ...
-  })
-  .catch((error) => {
+    console.log(user)
+  }).catch((error) => {
+    // Handle Errors here.
     const errorCode = error.code;
     const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+  }
+
+  const handleSignUp=async (userData)=>{
+    console.log(userData)
+    await createUserWithEmailAndPassword(auth, userData.email, userData.password)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    console.log(user)
+    // ...
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
   });
   }
 
@@ -81,7 +109,14 @@ export default function Signup() {
                     placeholder="Email"
                     id="email"
                     value={userData.email}
-                  onChange={(e)=>{setUserData({email:e.target.value});console.log(userData)}}></input>
+                    onChange={(e) => {
+                      setUserData((prevUserData) => ({
+                        ...prevUserData,
+                        email: e.target.value
+                      }));
+                      console.log(userData); // Log the updated state here
+                    }}
+                    ></input>
                 </div>
               </div>
               <div>
@@ -98,7 +133,13 @@ export default function Signup() {
                     placeholder="Password"
                     id="password"
                     value={userData.password} 
-                    onChange={(e)=>{setUserData({password:e.target.value});console.log(userData)}}
+                    onChange={(e) => {
+                      setUserData((prevUserData) => ({
+                        ...prevUserData,
+                        password: e.target.value
+                      }));
+                      console.log(userData); // Log the updated state here
+                    }}
                     ></input>
                 </div>
               </div>
@@ -106,7 +147,7 @@ export default function Signup() {
                 <button
                   type="button"
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
-                onClick={handleSignUp}>
+                onClick={()=>handleSignUp(userData)}>
                   Create Account <ArrowRight className="ml-2" size={16} />
                 </button>
               </div>
@@ -116,7 +157,7 @@ export default function Signup() {
             <button
               type="button"
               className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
-            >
+            onClick={()=>handleGoogleSignUp()}>
               <span className="mr-2 inline-block">
                 <svg
                   className="h-6 w-6 text-rose-500"
