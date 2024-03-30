@@ -15,12 +15,13 @@ export default function HomeHero1() {
             possimus, nihil molestiae modi tenetur esse qui repudiandae cum fuga aspernatur ea?
           </p>
           <div className="mt-8">
-            <button
-              type="button"
+            <a
+                href="/dashboard"
               className="rounded-md bg-black px-3 py-2.5 text-lg font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              
             >
               Go to Dashboard
-            </button>
+            </a>
           </div>
         </div>
         <div className="rounded-lg p-4 flex justify-center">

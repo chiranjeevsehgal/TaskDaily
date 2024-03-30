@@ -6,15 +6,15 @@ import { useNavigate } from "react-router-dom";
 const menuItems = [
   {
     name: 'Home',
-    href: '#',
+    href: '/',
   },
   {
-    name: 'About',
-    href: '#',
+    name: 'Prepare',
+    href: '/dashboard',
   },
   {
-    name: 'Contact',
-    href: '#',
+    name: 'Leaderboard',
+    href: '/leaderboard',
   },
 ]
 
@@ -31,7 +31,7 @@ const handleSignUpClick=()=>{
     <div className=" w-full bg-white mt-8">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="inline-flex items-center space-x-2">
-          <span>
+          <a href='/' className='flex flex-row gap-x-2'><span>
             <svg
               width="30"
               height="30"
@@ -45,7 +45,7 @@ const handleSignUpClick=()=>{
               />
             </svg>
           </span>
-          <span className="font-bold text-xl">TaskDaily</span>
+          <span className="font-bold text-xl">TaskDaily</span></a>
         </div>
         <div className="hidden lg:block">
           <ul className="inline-flex space-x-8">
