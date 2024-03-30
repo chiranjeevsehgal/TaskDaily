@@ -3,17 +3,19 @@ import { ArrowRight } from 'lucide-react'
 import {auth} from '../../firebase'
 import {useAuthState} from 'react-firebase-hooks/auth'
 import { signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,createUserWithEmailAndPassword } from '@firebase/auth'
+import { useNavigate } from 'react-router-dom'
 // import {auth} from '../firebase'
 
 export default function Signup() {
 
+  const navigateTo=useNavigate()
 
   const [userData,setUserData]=React.useState({email: "", password: ""})
 
 
   const provider = new GoogleAuthProvider();
-  const handleGoogleSignUp=()=>{
-    signInWithPopup(auth, provider)
+  const handleGoogleSignUp=async ()=>{
+    await signInWithPopup(auth, provider)
   .then((result) => {
     // This gives you a Google Access Token. You can use it to access the Google API.
     const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -23,6 +25,7 @@ export default function Signup() {
     // IdP data available using getAdditionalUserInfo(result)
     // ...
     console.log(user)
+    
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;
@@ -33,6 +36,8 @@ export default function Signup() {
     const credential = GoogleAuthProvider.credentialFromError(error);
     // ...
   });
+  window.localStorage.setItem("email",userData.email);
+  navigateTo("/dashboard")
   }
 
   const handleSignUp=async (userData)=>{
@@ -42,12 +47,15 @@ export default function Signup() {
     // Signed up 
     const user = userCredential.user;
     console.log(user)
+    
     // ...
   }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     // ..
   });
+  window.localStorage.setItem("email",userData.email);
+  navigateTo("/dashboard")
   }
 
   return (
