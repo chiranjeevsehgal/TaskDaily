@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Menu, X } from 'lucide-react'
-
+import { useNavigate } from "react-router-dom";
 const menuItems = [
   {
     name: 'Home',
@@ -20,11 +20,13 @@ const menuItems = [
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
-
+  const navigateTo = useNavigate();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
-
+const handleSignUpClick=()=>{
+  navigateTo('/Signup')
+}
   return (
     <div className=" w-full bg-white mt-8">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
@@ -70,7 +72,7 @@ function Navbar() {
           <button
             type="button"
             className="rounded-md bg-black px-3 py-2 font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black text-lg"
-          >
+            onClick={handleSignUpClick}>
             Sign Up
           </button>
           
@@ -135,7 +137,7 @@ function Navbar() {
                 <button
                   type="button"
                   className="mt-4 w-full rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                >
+                onClick={handleSignUpClick}>
                   Sign Up
                 </button>
               </div>

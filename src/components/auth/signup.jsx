@@ -1,7 +1,27 @@
 import React from 'react'
 import { ArrowRight } from 'lucide-react'
+import {auth} from '../../firebase'
+import {useAuthState} from 'react-firebase-hooks/auth'
+import { signInWithEmailAndPassword } from '@firebase/auth'
+// import {auth} from '../firebase'
+export default function Signup() {
 
-export function SignUpThree() {
+
+  const [userData,setUserData]=React.useState({email: "", password: ""})
+
+  const handleSignUp=()=>{
+    signInWithEmailAndPassword(auth, userData.email, userData.password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+  }
+
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -60,7 +80,8 @@ export function SignUpThree() {
                     type="email"
                     placeholder="Email"
                     id="email"
-                  ></input>
+                    value={userData.email}
+                  onChange={(e)=>{setUserData({email:e.target.value});console.log(userData)}}></input>
                 </div>
               </div>
               <div>
@@ -76,14 +97,16 @@ export function SignUpThree() {
                     type="password"
                     placeholder="Password"
                     id="password"
-                  ></input>
+                    value={userData.password} 
+                    onChange={(e)=>{setUserData({password:e.target.value});console.log(userData)}}
+                    ></input>
                 </div>
               </div>
               <div>
                 <button
                   type="button"
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
-                >
+                onClick={handleSignUp}>
                   Create Account <ArrowRight className="ml-2" size={16} />
                 </button>
               </div>
@@ -106,7 +129,7 @@ export function SignUpThree() {
               </span>
               Sign up with Google
             </button>
-            <button
+            {/* <button
               type="button"
               className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
             >
@@ -121,7 +144,7 @@ export function SignUpThree() {
                 </svg>
               </span>
               Sign up with Facebook
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
