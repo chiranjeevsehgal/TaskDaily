@@ -25,7 +25,7 @@ export default function HomeHero1() {
         </div>
         <div className="rounded-lg p-4 flex justify-center">
           <img
-            className="aspect-[3/2] w-96 rounded-lg bg-gray-50 object-cover lg:aspect-auto lg:h-[400px]"
+            className="aspect-[3/2] w-96 rounded-lg object-cover lg:aspect-auto lg:h-[400px]"
             src="call.gif"
             alt=""
           />
