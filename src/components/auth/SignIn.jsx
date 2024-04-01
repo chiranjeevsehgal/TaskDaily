@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
 
+const navigateTo = useNavigate()
 
 const [userData, setUserData] = React.useState({ email: '', password: '' });
 const provider = new GoogleAuthProvider();
@@ -18,12 +19,14 @@ const handleLogin = async() => {
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
+    navigateTo("/dashboard")
     // ...
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
   });
+
 }
 
 const handleGoogleSignUp = async () => {
