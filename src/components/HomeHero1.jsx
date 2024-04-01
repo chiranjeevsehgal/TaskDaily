@@ -8,7 +8,7 @@ export default function HomeHero1() {
           
           
           <h1 className="mt-8 mx-auto max-w-4xl text-3xl font-bold tracking-tight text-black md:text-4xl lg:text-6xl text-center">
-            People who really cares about your business
+          Level Up Daily: <br/>Master Placement Challenges!
           </h1>
           <p className="mt-8 max-w-3xl text-lg text-gray-700 text-center">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia ipsam nulla aperiam quo

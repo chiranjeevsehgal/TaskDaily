@@ -1,10 +1,15 @@
 import Navbar from "../components/Navbar";
+import QuestionCard from "../components/QuestionCard";
+
 
 export default function Aptitude() {
     return (
         <div>
             <Navbar/>
-            <h1>Aptitude</h1>
+            <QuestionCard question="Question" options="a" image="" correctAnswer="a"/>
+            <QuestionCard question="Question" options="a" image="" correctAnswer="a"/>
+            <QuestionCard question="Question" options="a" image="" correctAnswer="a"/>
+            <QuestionCard question="Question" options="a" image="" correctAnswer="a"/>
         </div>
     )
 }

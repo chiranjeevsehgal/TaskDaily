@@ -53,7 +53,7 @@ const handleSignUpClick=()=>{
               <li key={item.name}>
                 <a
                   href={item.href}
-                  className="text-lg font-semibold text-gray-800 hover:text-gray-900"
+                  className="text-lg font-semibold text-gray-800 hover:text-orange-400"
                 >
                   {item.name}
                 </a>
