@@ -27,6 +27,9 @@ function Navbar() {
 const handleSignUpClick=()=>{
   navigateTo('/Signup')
 }
+const handleSignInClick=()=>{
+  navigateTo('/Signin')
+}
   return (
     <div className=" w-full bg-white mt-8">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
@@ -65,7 +68,7 @@ const handleSignUpClick=()=>{
           <button
             type="button"
             className="rounded-md text-gray-800 px-3 py-2 font-semibold  shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black text-lg mr-4"
-          >
+          onClick={handleSignInClick}>
             Sign In
           </button>
           
