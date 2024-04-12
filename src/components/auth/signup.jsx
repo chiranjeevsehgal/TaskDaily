@@ -1,9 +1,10 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { auth } from '../../firebase';
+import { auth,db } from '../../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, setPersistence, browserLocalPersistence, signOut } from '@firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import{getDoc,setDoc,doc} from "firebase/firestore";
 
 export default function Signup() {
   const navigateTo = useNavigate();
@@ -33,6 +34,7 @@ export default function Signup() {
   const handleSignUp = async (userData) => {
     console.log(userData);
     await createUserWithEmailAndPassword(auth, userData.email, userData.password)
+    await setDoc(doc(db,`users`,userData.email),{name:userData.name?userData.name:userData.email,email:userData.email,password:userData.password})
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);

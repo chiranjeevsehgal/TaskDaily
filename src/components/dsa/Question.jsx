@@ -1,27 +1,74 @@
-import React from 'react'
+import React from 'react';
 import Example from './Example';
-function Question() {
+
+function Question(props) {
+  // Define the color based on the difficulty level
+  let color;
+  switch (props.difficulty.toLowerCase()) {
+    case 'easy':
+      color = 'green';
+      break;
+    case 'medium':
+      color = 'yellow';
+      break;
+    case 'hard':
+      color = 'red';
+      break;
+    default:
+      color = 'black';
+  }
+
   return (
-    <div className=" mt-8  border-2">
-    <p>Make The String Great</p>
-    <p color='green'>easy</p>
-    <div>{`Given a string s of lower and upper case English letters.
-
-A good string is a string which doesn't have two adjacent characters s[i] and s[i + 1] where:
-
-0 <= i <= s.length - 2
-s[i] is a lower-case letter and s[i + 1] is the same letter but in upper-case or vice-versa.
-To make the string good, you can choose two adjacent characters that make the string bad and remove them. You can keep doing this until the string becomes good.
-
-Return the string after making it good. The answer is guaranteed to be unique under the given constraints.
-
-Notice that an empty string is also good.`}</div>
-    {/* <img> // optional for image compatibilty */}
-    <Example id={1} input={`"leEeetcode"`} output={`"leetcode"`} explanation={`In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode".`}/>
-    <Example id={1} input={`"leEeetcode"`} output={`"leetcode"`} explanation={`In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode".`}/>
-    <Example id={1} input={`"leEeetcode"`} output={`"leetcode"`} explanation={`In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode". Hard coded data subject to change from DB`}/>
+    <div className="mt-8 border-2">
+      <p>{props.title}</p>
+      {/* Apply inline style for text color */}
+      <p style={{ color }}>{props.difficulty}</p>
+      <div>{props.body}</div>
+      {props.examples.map((example) => (
+        <Example key={example.id} id={example.id} input={example.input} output={example.output} explanation={example.explanation} />
+      ))}
     </div>
-  )
+  );
 }
 
-export default Question
+export default Question;
+
+
+// import React from 'react'
+// import Example from './Example';
+// function Question(props) {
+
+//   let color;
+//   switch (props.difficulty.toLowerCase()) {
+//     case 'easy':
+//       color = 'green';
+//       break;
+//     case 'medium':
+//       color = 'yellow';
+//       break;
+//     case 'hard':
+//       color = 'red';
+//       break;
+//     default:
+//       color = 'black';
+//   }
+//   return (
+//     <div className=" mt-8  border-2">
+//     <p>{props.title}</p>
+//     <p style={color?color:black}>{props.difficulty}</p>
+//     <div>{props.body}</div>
+//     {/* <img> // optional for image compatibilty */}
+//     {/* <Example id={1} input={`"leEeetcode"`} output={`"leetcode"`} explanation={`In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode".`}/>
+//     <Example id={1} input={`"leEeetcode"`} output={`"leetcode"`} explanation={`In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode".`}/>
+//     <Example id={1} input={`"leEeetcode"`} output={`"leetcode"`} explanation={`In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode". Hard coded data subject to change from DB`}/>
+//     </div> */}
+//     {props.examples.map((example) =>{
+//       return (
+//         <Example key={example.id} id={example.id} input={example.input} output={example.output} explanation={example.explanation}/>
+//       )
+//     })}
+//     </div>
+//   )
+// }
+
+// export default Question
