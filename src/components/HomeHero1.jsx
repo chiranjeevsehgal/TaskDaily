@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function HomeHero1() {
   return (
-    <div className="relative w-full bg-white">
+    <div className="relative w-full">
       <div className="mx-auto max-w-7xl lg:px-8">
         <div className="flex flex-col justify-center px-4 py-10 lg:px-6 items-center	">
           

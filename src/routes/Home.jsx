@@ -5,12 +5,12 @@ import Navbar from "../components/Navbar";
 
 function Home(){
     return (
-        <>
+        <div className="bg-gray-50">
         <Navbar/>
         <HomeHero1/>
         <Features/>
         <Footer/>
-        </>
+        </div>
     )
 }
 

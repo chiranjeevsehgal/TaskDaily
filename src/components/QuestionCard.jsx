@@ -76,7 +76,7 @@ export default function QuestionCard({ number, question, options, correctAnswer,
 
 {/* </div> */}
               {options.map((option, index) => (
-                <div key={`${number}${index}`} className={`${selected === `${number}_${option}`  && result ? 'border-2 border-green-500': selected === `${number}_${option}`  && !result && buttonDisabled? 'border-2 border-red-500': ''} flex flex-row gap-x-2 hover:bg-green-100 cursor-pointer p-1`}>
+                <div key={`${number}${index}`} className={`${selected === `${number}_${option}`  && result ? 'border-2 border-green-500 rounded-md': selected === `${number}_${option}`  && !result && buttonDisabled? 'border-2 border-red-500 rounded-md': ''} flex flex-row gap-x-2 hover:bg-green-100 cursor-pointer p-1 px-2 rounded-md`}>
                   <input
                     type="radio"
                     id={`option${number}${index}`}
@@ -98,11 +98,11 @@ export default function QuestionCard({ number, question, options, correctAnswer,
             </div>
 
             {showAnswer && (
-              <div className='flex flex-col mt-4 mb-4'>
+              <div className='flex flex-col mt-4 mb-4 '>
                 <p>Answer:</p>
                 {/* <p>a: Option 1</p> */}
                 <p>{`${result ? "Correct Answer": "Wrong Answer"}`}</p>
-                <p>{correctAnswer}</p>
+                <p>Correct Answer: {correctAnswer}</p>
                 <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
               </div>
             )}
