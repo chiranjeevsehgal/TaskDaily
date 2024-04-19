@@ -12,7 +12,7 @@ export default function Aptitude() {
 
     const getQuestions = async () => {
         try {
-            const docRef = doc(db, 'aptitude', '19042024');
+            const docRef = doc(db, 'demoques', '190424');
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 const res = docSnap.data();
