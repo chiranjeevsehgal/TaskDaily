@@ -24,7 +24,7 @@ export default function QuestionCard(props) {
 
 
   return (
-    <div className='flex justify-center mb-12'>
+    <div className='flex justify-center mb-12 w-screen' >
     <div className='flex flex-col items-center mt-8 w-6/12 rounded-xl border-4'>
       <div className='flex flex-col w-full'>
         
