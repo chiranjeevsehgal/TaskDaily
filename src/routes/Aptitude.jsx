@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import QuestionCard from "../components/aptitude/QuestionCard";
 import{getDoc,setDoc,doc} from "firebase/firestore";
 import { auth,db } from '../firebase';
+import Uploading from "../components/aptitude/Uploading";
+
 
 export default function Aptitude() {
     // const [question,setQuestion]=useState([{id:"",problem:"", options:[], explanation:"",answer_option:""}])
@@ -48,6 +50,7 @@ export default function Aptitude() {
                     explanation={question.explanation}
                     />
                 ))}
+                {/* <Uploading/> */}
                 
         </div>
             {/* <QuestionCard number={question.id} question={question.problem} options={question.options} image="" correctAnswer={question.answer_option} explanation={question.explanation}/> */}
