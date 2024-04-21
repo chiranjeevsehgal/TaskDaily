@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import QuestionCard from "../components/aptitude/QuestionCard";
-import{getDoc,setDoc,doc} from "firebase/firestore";
-import { auth,db } from '../firebase';
-import Uploading from "../components/aptitude/Uploading";
+import { getDoc, setDoc, doc } from "firebase/firestore";
+import { auth, db } from '../firebase';
 
 
 export default function Aptitude() {
-    // const [question,setQuestion]=useState([{id:"",problem:"", options:[], explanation:"",answer_option:""}])
-    const [questions,setQuestions]=useState([])
+    
+    const [questions, setQuestions] = useState([])
+    const [score, setScore] = useState(0);
+    const [count, setCount] = useState(0);
 
     const getQuestions = async () => {
         try {
@@ -20,10 +21,10 @@ export default function Aptitude() {
 
                 // console.log(res);
                 // console.log(questionsArray);
-                
+
                 setQuestions(questionsArray);
                 console.log(questions);
-                
+
             } else {
                 console.log('No such document!');
             }
@@ -31,32 +32,61 @@ export default function Aptitude() {
             console.error('Error fetching document:', error);
         }
     }
+
+    const handleFinalSubmit = () => {
+        if (count === 10) {    
+            alert(`Total Score: ${score}`);
+        } else {
+            alert("Please attempt all questions before submitting.");   
+        }
+    };
+
+    const handleCorrectAnswer = () => {
+        setScore(score + 10);
+    };
+
+
+    const handleCount = ()=>{
+        setCount(count + 1);
+    }
+
+
     useEffect(() => {
         getQuestions();
     }, [1]);
 
     return (
         <div>
-            <Navbar/>
+            <Navbar />
             <div className="flex flex-wrap justify-center">
-            {questions.map((question, index) => (
-                <QuestionCard
-                    key={index}
-                    number={question.id}
-                    question={question.problem}
-                    options={question.options}
-                    image=""
-                    correctAnswer={question.answer_option}
-                    explanation={question.explanation}
+                {questions.map((question, index) => (
+                    <QuestionCard
+                        key={index}
+                        number={question.id}
+                        question={question.problem}
+                        options={question.options}
+                        image=""
+                        correctAnswer={question.answer_option}
+                        explanation={question.explanation}
+                        onCorrectAnswer={handleCorrectAnswer}
+                        onAnswerCount = {handleCount}
+                        
                     />
                 ))}
                 {/* <Uploading/> */}
+
+            </div>
+            <div className="flex flex-wrap justify-center mb-20">
+            <button
+                    onClick={handleFinalSubmit}
+                    className={`bg-white border border-sky-600 py-2 px-4 text-blue-800 rounded-md mt-6 items-center justify-center hover:border-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}
+                >
+                    SUBMIT
+                </button>    
                 
-        </div>
-            {/* <QuestionCard number={question.id} question={question.problem} options={question.options} image="" correctAnswer={question.answer_option} explanation={question.explanation}/> */}
-            {/* <QuestionCard number="2" question="Question" options={['2a', '2b', '2c', '2d']} image="" correctAnswer="2a"/> */}
-            {/* <QuestionCard number="3" question="Question" options={['3a', '3b', '3c', '3d']} image="" correctAnswer="3b"/> */}
-            {/* <QuestionCard number="4" question="Question" options={['4a', '4b', '4c', '4d']} image="" correctAnswer="4d"/> */}
-        </div>
+
+                
+            </div>
+            </div>
     )
 }

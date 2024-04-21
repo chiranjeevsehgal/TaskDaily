@@ -9,6 +9,7 @@ export default function QuestionCard(props) {
 
 
   const correctAnswerText = props.options[props.correctAnswer];
+  
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
     setShowAnswer(false); 
@@ -18,6 +19,10 @@ export default function QuestionCard(props) {
     event.preventDefault();
     setIsCorrect(selectedOption === correctAnswerText); 
     setShowAnswer(true);
+    props.onAnswerCount()
+    if (selectedOption === correctAnswerText) {
+      props.onCorrectAnswer(); // Call the parent component's function to handle correct answer
+  }
   };
 
 
@@ -55,7 +60,7 @@ export default function QuestionCard(props) {
               ))}
               <div className='flex flex-row mt-2 mb-6 justify-end mr-8'>
                 <button type="submit" disabled={!selectedOption || showAnswer} className={`flex bg-gray-200 py-2 px-6 rounded-md mt-6 items-center justify-center hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 ${(!selectedOption || showAnswer) ? 'pointer-events-none opacity-50' : ''}`}>
-                  Submit <span className='w-4 ml-2'>▼</span> 
+                  Check <span className='w-4 ml-2'>▼</span> 
                 </button>
               </div>
             </form>
