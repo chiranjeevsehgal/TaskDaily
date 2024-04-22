@@ -23,6 +23,11 @@ export default function DSA(){
         }
     }
     
+    const handleSubmit=async() => {
+        
+        
+        console.log("submitted")
+    }
     React.useEffect(() => {
         getQuestionOftheDay();
     }, [1]);
@@ -42,7 +47,7 @@ export default function DSA(){
         <button
   type="button"
   className="rounded-full justify-end bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
->
+onClick={handleSubmit}>
   Submit
     </button>
 </div>
@@ -51,3 +56,26 @@ export default function DSA(){
         </div>
     )
 }
+
+
+
+
+// function formatDate(serverTimestamp) {
+//     // Create a new Date object using the server timestamp
+//     const date = new Date(serverTimestamp);
+
+//     // Extract day, month, and year components from the date object
+//     const day = date.getDate().toString().padStart(2, '0'); // Day of the month (with leading zero if necessary)
+//     const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Month (adding 1 because months are zero-based)
+//     const year = date.getFullYear().toString().slice(-2); // Last two digits of the year
+
+//     // Concatenate day, month, and year components to form the desired format
+//     const formattedDate = `${day}${month}${year}`;
+
+//     return formattedDate;
+// }
+
+// // Example usage:
+// const serverTimestamp = 1618542353000; // Example server timestamp (in milliseconds)
+// const formattedDate = formatDate(serverTimestamp);
+// console.log(formattedDate); // Output will be something like "160421" (for 16th April 2021)
